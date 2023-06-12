@@ -12,7 +12,8 @@ class HomePageWidget extends StatefulWidget {
 
 class _HomePageWidgetState extends State<HomePageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
+  final name = "data";
+  final name2 = "data";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
