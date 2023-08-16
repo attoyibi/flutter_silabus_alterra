@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'HomePage.dart';
-// ++++++++++++++MyStatelessWidget+++++++++++++++++++
+import 'package:flutter_modular/flutter_modular.dart';
+
+import 'app/app_module.dart';
+import 'app/app_widget.dart';
 
 void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  get blue => null;
-
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePageWidget(),
-    );
-  }
+  runApp(
+    ModularApp(
+      module: AppModule(),
+      child: const AppWidget(),
+    ),
+  );
 }
