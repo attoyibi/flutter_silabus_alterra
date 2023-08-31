@@ -1,0 +1,185 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "03_fundamental_dart",
+      "cwd": "03_fundamental_dart",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "04_branch_loop_function_dart",
+      "cwd": "04_branch_loop_function_dart",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "05_advance_function_async_await_collection_dart",
+      "cwd": "05_advance_function_async_await_collection_dart",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "06_fundamental_object_oriented_programming",
+      "cwd": "06_fundamental_object_oriented_programming",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "07_deep_dive_into_dart_object_oriented_programming",
+      "cwd": "07_deep_dive_into_dart_object_oriented_programming",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "08_introduction_flutter",
+      "cwd": "08_introduction_flutter",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "08_introduction_flutter (profile mode)",
+      "cwd": "08_introduction_flutter",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "08_introduction_flutter (release mode)",
+      "cwd": "08_introduction_flutter",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "09_flutter_cli",
+      "cwd": "09_flutter_cli",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "09_flutter_cli (profile mode)",
+      "cwd": "09_flutter_cli",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "09_flutter_cli (release mode)",
+      "cwd": "09_flutter_cli",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "10_flutter_widget_and_layouting",
+      "cwd": "10_flutter_widget_and_layouting",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "10_flutter_widget_and_layouting (profile mode)",
+      "cwd": "10_flutter_widget_and_layouting",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "10_flutter_widget_and_layouting (release mode)",
+      "cwd": "10_flutter_widget_and_layouting",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "11_form_input",
+      "cwd": "11_form_input",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "11_form_input (profile mode)",
+      "cwd": "11_form_input",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "11_form_input (release mode)",
+      "cwd": "11_form_input",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "12_advance_form",
+      "cwd": "12_advance_form",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "12_advance_form (profile mode)",
+      "cwd": "12_advance_form",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "12_advance_form (release mode)",
+      "cwd": "12_advance_form",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "platform_widget",
+      "cwd": "platform_widget",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "platform_widget (profile mode)",
+      "cwd": "platform_widget",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "platform_widget (release mode)",
+      "cwd": "platform_widget",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "starter",
+      "cwd": "starter",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "starter (profile mode)",
+      "cwd": "starter",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "starter (release mode)",
+      "cwd": "starter",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "Flutter (lib\\main.dart)",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "12_advance_form",
+      "program": "lib\\main.dart"
+    }
+  ]
+}

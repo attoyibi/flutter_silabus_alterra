@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 import 'package:advance_form/jawaban/soal_prioritas_satu.dart';
 import 'package:advance_form/jawaban/soal_prioritas_dua.dart';
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My App',
-      home: soalPrioritasDua(),
+      home: soalPrioritasSatu(),
     );
   }
 }

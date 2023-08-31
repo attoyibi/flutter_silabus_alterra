@@ -1,0 +1,29 @@
+import 'data.dart';
+// tantangan
+// buatlah sebuah fungsi yang akan memanggil semua data dari data.dart dan pisahkan setiap data dengan - print('-----------------------------------');
+// Buatlah sebuah fungsi yang akan menampilkan deskripsi dari barang dengan id 12.
+// buatlah fungsi yang akan memanggil hanya data yang bertitle pakaian
+// buatlah fungsi yang akan menggitung jumlah data pada data.dart
+// buatlah fungsi yang bisa mengetahui berapa jenis title yang ada pada data tersebut
+// buatlah sebuah fungsi yang akan menghapus setiap title elektronik pada data.dart
+// Buatlah sebuah fungsi yang menerima input tanggal dan menampilkan semua data stok barang yang tanggal masuknya lebih awal dari tanggal yang diberikan.
+// buatlah sebuah variabel yang menggunakan anonimus/arrow function sehingga membuat data baru yang berisikan hanya "elektronik"
+// Buatlah sebuah fungsi dengan Future yang akan menghitung total stok barang dari data stok dengan title "Elektronik". Tampilkan setelah 5 detik 
+
+//ketentuan
+//berikan komen pada setiap fungsi yang diberikan
+//terapkan clean code pada setiap kode kalian
+//kerjakan secara berkelompok dan setiap orang minimal mengerjakan 1 soal dengan bantuan peserta yang lain
+//tidak perlu mengerjakan semua tantangan, pilihlah tantangan yang menurut kalian menarik
+// setiap tantangan akan berada pada file yang sama yaitu main.dart dan didalamnya akan terdapat beberapa function
+void main() {
+  // Menggunakan data dari data.dart
+  for (var product in stockData) {
+    print('ID: ${product['id']}');
+    print('Nama: ${product['nama']}');
+    print('Title: ${product['title']}');
+    print('Deskripsi: ${product['deskripsi']}');
+    print('Tanggal Masuk: ${product['tanggal_masuk']}');
+    print('-----------------------------------');
+  }
+}
