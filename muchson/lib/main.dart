@@ -195,8 +195,8 @@ class _HelloWordState extends State<HelloWord> {
                         return ListTile(
                           leading: FlutterLogo(),
                           title: Text('${data_kontak[index]["title"]}'),
-                          subtitle:
-                              Text('${data_kontak[index]["jenis_kelamin"]}'),
+                          subtitle: Text(
+                              '${data_kontak[index]["jenis_kelamin"]}-C++ - Pilihan 1'),
                         );
                       })
                   // ListView(
