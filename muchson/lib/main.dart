@@ -1,14 +1,39 @@
 import 'package:flutter/material.dart';
-// import 'data/data_kontak.dart';
+import 'package:intl/intl.dart';
 
-// Failed to launch Pixel_3a_API_33_x86_64: Error: Emulator didn't connect within 60 seconds
-// flutter emulators --launch Pixel_3a_API_33_x86_64
+List data_kontak = [
+  {
+    "title": "Kepala SUku",
+    "jenis_kelamin": "Laki-laki",
+  },
+  {
+    "title": "Guru Bahasa Cinta",
+    "jenis_kelamin": "perempuan",
+  },
+  {
+    "title": "Bendahara Sekolah",
+    "jenis_kelamin": "Laki-laki",
+  },
+  {"title": "Guru Matematika", "jenis_kelamin": "Perempuan"},
+  {"title": "Guru Biologi", "jenis_kelamin": "Laki-laki"}
+]; // data  akan  kita dapatkan dari API temen2 back end
+
 void main() {
-  runApp(const HelloWord());
+  runApp(MaterialApp(
+    home: MyApp(),
+  ));
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const HelloWord();
+  }
 }
 
 class HelloWord extends StatefulWidget {
-  //1 alwin  juharman
   const HelloWord({super.key});
 
   @override
@@ -18,38 +43,30 @@ class HelloWord extends StatefulWidget {
 class _HelloWordState extends State<HelloWord> {
   var dropDownValue = 0;
   var checkValue = false;
-  //3 yunita  bima
   var inputControllers = TextEditingController();
   var radioValue = '';
-  List data_kontak = [
-    {"title": "Kepala SUku", "jenis_kelamin": "Laki-laki"},
-    {"title": "Guru Bahasa Cinta", "jenis_kelamin": "perempuan"},
-    {"title": "Bendahara Sekolah", "jenis_kelamin": "Laki-laki"},
-    {"title": "Guru Matematika", "jenis_kelamin": "Perempuan"},
-    {"title": "Guru Biologi", "jenis_kelamin": "Laki-laki"}
-  ]; // data  akan  kita dapatkan dari API temen2 back end
+  List<String> checkboxValue = [];
+  var isCheckbox1 = false;
+  String textFieldData = ''; // Tambahkan ini
+  //dua variabel yang dibuat jika ingin menggunakan date
+  DateTime _dueDate = DateTime.now();
+  final currentDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
-    Color getColor(Set<MaterialState> states) {
-      const Set<MaterialState> interactiveStates = <MaterialState>{
-        MaterialState.pressed,
-        MaterialState.hovered,
-        MaterialState.focused,
-      };
-      if (states.any(interactiveStates.contains)) {
-        return Colors.green;
-      }
-      return Colors.grey;
-    }
+    // Color getColor(Set<MaterialState> states) {
+    //   const Set<MaterialState> interactiveStates = <MaterialState>{
+    //     MaterialState.pressed,
+    //     MaterialState.hovered,
+    //     MaterialState.focused,
+    //   };
+    //   if (states.any(interactiveStates.contains)) {
+    //     return Colors.green;
+    //   }
+    //   return Colors.grey;
+    // }
 
     return MaterialApp(
-        //4
-
-        // theme: ThemeData.dark(), // Mengatur tema gelap
-        // initialRoute: 'home',
-        // routes: {
-        //   'home': (_) => HomePage(),
-        // },
         home: Scaffold(
       appBar: AppBar(
         title: Text('Muchson App'),
@@ -58,20 +75,16 @@ class _HelloWordState extends State<HelloWord> {
         child: Container(
           color: Colors.grey,
           margin: EdgeInsets.only(top: 30, left: 20, right: 20),
-          child: Center(
-              child: Column(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Muchson'),
-                  Text('Muchson'),
-                ],
-              ),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: []),
               SizedBox(
                 height: 60,
               ),
-              Text('List Anak Didik'),
+              Text('List Kelas D'),
               TextField(
                 controller: inputControllers,
                 onChanged: (inputControllers) {
@@ -111,76 +124,15 @@ class _HelloWordState extends State<HelloWord> {
               ),
               //checkbox simple
               Divider(),
-              Row(
-                children: [
-                  Checkbox(
-                      value: checkValue,
-                      checkColor: Colors.green,
-                      fillColor: MaterialStateProperty.resolveWith(getColor),
-                      onChanged: (bool? value) {
-                        setState(() {
-                          checkValue = value!;
-                          print('$checkValue');
-                        });
-                      }),
-                  Text('C++'),
-                ],
-              ),
-              Row(
-                children: [
-                  Checkbox(
-                      value: checkValue,
-                      checkColor: Colors.green,
-                      fillColor: MaterialStateProperty.resolveWith(getColor),
-                      onChanged: (bool? value) {
-                        setState(() {
-                          checkValue = value!;
-                          print('$checkValue');
-                        });
-                      }),
-                  Text('Dart'),
-                ],
-              ),
-              Row(
-                children: [
-                  Checkbox(
-                      value: checkValue,
-                      checkColor: Colors.green,
-                      fillColor: MaterialStateProperty.resolveWith(getColor),
-                      onChanged: (bool? value) {
-                        setState(() {
-                          checkValue = value!;
-                          print('$checkValue');
-                        });
-                      }),
-                  Text('PHP'),
-                ],
-              ),
-              Divider(),
-              // CheckboxExample(),
-              DropdownButton(
-                  value: dropDownValue,
-                  items: [
-                    DropdownMenuItem(
-                      value: 0,
-                      child: Text('pilihan 1'),
-                    ),
-                    DropdownMenuItem(value: 1, child: Text('pilihan 2')),
-                    DropdownMenuItem(value: 2, child: Text('pilihan 3'))
-                  ],
-                  onChanged: (int? value) {
-                    setState(() {
-                      dropDownValue = value ?? 0;
-                      print('$dropDownValue');
-                    });
-                  }),
+
               ElevatedButton(
                 child: Text('Submit'),
                 onPressed: () {
                   setState(() {
                     data_kontak.add({
                       "title": "${inputControllers.text}",
-                      "jenis_kelamin": "$radioValue"
+                      "jenis_kelamin": "$radioValue",
+                      "skill": "$checkboxValue"
                     });
                   });
 
@@ -195,145 +147,80 @@ class _HelloWordState extends State<HelloWord> {
                         return ListTile(
                           leading: FlutterLogo(),
                           title: Text('${data_kontak[index]["title"]}'),
-                          subtitle: Text(
-                              '${data_kontak[index]["jenis_kelamin"]}-C++ - Pilihan 1'),
+                          subtitle:
+                              Text('${data_kontak[index]["jenis_kelamin"]}'),
+                          trailing: Wrap(children: [
+                            IconButton(
+                                onPressed: () {
+                                  //1. kita harus memasukkan datanya ke dalam onpress
+                                  // print('delete $data_kontak');
+                                  //2. setelah didapatkan datanya, maka kita olah sehingga data tersebut dihapus ketika tombol di tekah
+                                  setState(() {
+                                    data_kontak.removeAt(index);
+                                  });
+                                },
+                                icon: Icon(Icons.delete)),
+                            IconButton(
+                                onPressed: () => AlertEdit(context, index),
+                                icon: Icon(Icons.edit))
+                          ]),
                         );
-                      })
-                  // ListView(
-                  //   padding: const EdgeInsets.all(8),
-                  //   children: [
-                  //     Text('ADE ALI INDRA'),
-                  //   ],
-                  // ),
-                  ),
+                      })),
               SizedBox(
                 height: 20,
               ),
-
-              // Expanded(
-              //   child: GridView.count(
-              //     crossAxisCount: 2,
-              //     children: [
-              //       Text('ADE ALI INDRA'),
-              //       Text('ALWIN ZUHRIANDI MANALU'),
-              //       Text('ANISA YUNIARTI'),
-              //       Text('Bima Pangestu Nugraha'),
-              //       Text('Dastin Pranata Yuda'),
-              //       Text('David Christian Hui'),
-              //       Text('David Liem'),
-              //       Text('Delia Sepiana'),
-              //       Text('FAJRUL KAMAL'),
-              //       Text('GHAZI FARHANU DISASMORO'),
-              //       Text('HIDAYAH DANIAWATI'),
-              //       Text('JUHARMANSAH'),
-              //       Text('KATARINA ANDREA LAURENTIA'),
-              //       Text('MUHAMMAD AFRIZAL RASYID'),
-              //       Text('MUHAMMAD ARARYA HAFIZH ATHALLA'),
-              //       Text('MUHAMMAD ILHAM'),
-              //       Text('MUHAMMAD NGURAH ARYA PRATAMA'),
-              //       Text('MUSTIKA CHAIRANI'),
-              //       Text('NURMALASARI'),
-              //       Text('Phrimus Nufeto'),
-              //       Text('PUTRI DIANA HAFSYAWATI'),
-              //       Text('RACHAEL NATHASYA'),
-              //       Text('RAFI TAUFIQURAHMAN'),
-              //       Text('RAMADHAN PUTRA NUGRAHA'),
-              //       Text('YUNITA ANGGERAINI'),
-              //       Text('ADE ALI INDRA'),
-              //       Text('ALWIN ZUHRIANDI MANALU'),
-              //       Text('ANISA YUNIARTI'),
-              //       Text('Bima Pangestu Nugraha'),
-              //       Text('Dastin Pranata Yuda'),
-              //       Text('David Christian Hui'),
-              //       Text('David Liem'),
-              //       Text('Delia Sepiana'),
-              //       Text('FAJRUL KAMAL'),
-              //       Text('GHAZI FARHANU DISASMORO'),
-              //       Text('HIDAYAH DANIAWATI'),
-              //       Text('JUHARMANSAH'),
-              //       Text('KATARINA ANDREA LAURENTIA'),
-              //       Text('MUHAMMAD AFRIZAL RASYID'),
-              //       Text('MUHAMMAD ARARYA HAFIZH ATHALLA'),
-              //       Text('MUHAMMAD ILHAM'),
-              //       Text('MUHAMMAD NGURAH ARYA PRATAMA'),
-              //       Text('MUSTIKA CHAIRANI'),
-              //       Text('NURMALASARI'),
-              //       Text('Phrimus Nufeto'),
-              //       Text('PUTRI DIANA HAFSYAWATI'),
-              //       Text('RACHAEL NATHASYA'),
-              //       Text('RAFI TAUFIQURAHMAN'),
-              //       Text('RAMADHAN PUTRA NUGRAHA'),
-              //       Text('YUNITA ANGGERAINI'),
-              //       Text('ADE ALI INDRA'),
-              //       Text('ALWIN ZUHRIANDI MANALU'),
-              //       Text('ANISA YUNIARTI'),
-              //       Text('Bima Pangestu Nugraha'),
-              //       Text('Dastin Pranata Yuda'),
-              //       Text('David Christian Hui'),
-              //       Text('David Liem'),
-              //       Text('Delia Sepiana'),
-              //       Text('FAJRUL KAMAL'),
-              //       Text('GHAZI FARHANU DISASMORO'),
-              //       Text('HIDAYAH DANIAWATI'),
-              //       Text('JUHARMANSAH'),
-              //       Text('KATARINA ANDREA LAURENTIA'),
-              //       Text('MUHAMMAD AFRIZAL RASYID'),
-              //       Text('MUHAMMAD ARARYA HAFIZH ATHALLA'),
-              //       Text('MUHAMMAD ILHAM'),
-              //       Text('MUHAMMAD NGURAH ARYA PRATAMA'),
-              //       Text('MUSTIKA CHAIRANI'),
-              //       Text('NURMALASARI'),
-              //       Text('Phrimus Nufeto'),
-              //       Text('PUTRI DIANA HAFSYAWATI'),
-              //       Text('RACHAEL NATHASYA'),
-              //       Text('RAFI TAUFIQURAHMAN'),
-              //       Text('RAMADHAN PUTRA NUGRAHA'),
-              //       Text('YUNITA ANGGERAINI'),
-              //       Text('ADE ALI INDRA'),
-              //       Text('ALWIN ZUHRIANDI MANALU'),
-              //       Text('ANISA YUNIARTI'),
-              //       Text('Bima Pangestu Nugraha'),
-              //       Text('Dastin Pranata Yuda'),
-              //       Text('David Christian Hui'),
-              //       Text('David Liem'),
-              //       Text('Delia Sepiana'),
-              //       Text('FAJRUL KAMAL'),
-              //       Text('GHAZI FARHANU DISASMORO'),
-              //       Text('HIDAYAH DANIAWATI'),
-              //       Text('JUHARMANSAH'),
-              //       Text('KATARINA ANDREA LAURENTIA'),
-              //       Text('MUHAMMAD AFRIZAL RASYID'),
-              //       Text('MUHAMMAD ARARYA HAFIZH ATHALLA'),
-              //       Text('MUHAMMAD ILHAM'),
-              //       Text('MUHAMMAD NGURAH ARYA PRATAMA'),
-              //       Text('MUSTIKA CHAIRANI'),
-              //       Text('NURMALASARI'),
-              //       Text('Phrimus Nufeto'),
-              //       Text('PUTRI DIANA HAFSYAWATI'),
-              //       Text('RACHAEL NATHASYA'),
-              //       Text('RAFI TAUFIQURAHMAN'),
-              //       Text('RAMADHAN PUTRA NUGRAHA'),
-              //       Text('YUNITA ANGGERAINI'),
-              //     ],
-              //   ),
-              // )
             ],
-          )),
+          ),
         ),
       ),
     ));
   }
-}
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  Future<String?> AlertEdit(BuildContext context, int index) {
+    final contact = data_kontak[index]['title'];
+    final radioJenisKelamin = data_kontak[index]['jenis_kelamin'];
+    TextEditingController nameControllerEdit =
+        TextEditingController(text: contact);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [Text('ini merupakan menu home page')],
-      ),
-    );
+    return showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: const Text('AlertDialog Title'),
+              content: Column(children: [
+                Text('nama'),
+                TextField(
+                  controller: nameControllerEdit,
+                ),
+                // buat radio button
+                // dalem value di radio button, kamu masukin set up valuenya sama dengan radioJenisKelamin
+              ]),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      //logika untuk menindih value berdsarkan index
+                      print(data_kontak);
+                      setState(() {
+                        data_kontak[index]["title"] = nameControllerEdit.text;
+                      });
+                      Navigator.pop(context);
+                      print(data_kontak);
+
+                      print('submit edit');
+                    },
+                    child: Text('Submit Edit')),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, 'Cancel');
+                    },
+                    child: Text('Cancel'))
+              ],
+            )
+        // 1. kita panggil semua data
+        // print('edit $data_kontak');
+        // 2. munculin box baru (show dialog/alert dialog)
+        // 3. di dalam box itu (show dialog/alert dialog) membuat form untuk memperharui data
+        // 4. masukkan data sebelumnya ke alert dialog tersebut(tempat kita untuk mendapatkan data baru)
+        // 5. ketika button di klik, maka data akan berganti
+        );
   }
 }
