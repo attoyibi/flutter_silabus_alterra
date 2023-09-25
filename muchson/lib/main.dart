@@ -1,26 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:intl/intl.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:muchson/theme/app_theme.dart';
+import 'package:open_file/open_file.dart';
+import 'ui/screen/galeri.dart';
 
 List data_kontak = [
   {
     "title": "Kepala SUku",
     "jenis_kelamin": "Laki-laki",
+    'color': Colors.blue,
   },
   {
     "title": "Guru Bahasa Cinta",
     "jenis_kelamin": "perempuan",
+    'color': Colors.blue,
   },
   {
     "title": "Bendahara Sekolah",
     "jenis_kelamin": "Laki-laki",
+    'color': Colors.blue,
   },
-  {"title": "Guru Matematika", "jenis_kelamin": "Perempuan"},
-  {"title": "Guru Biologi", "jenis_kelamin": "Laki-laki"}
 ]; // data  akan  kita dapatkan dari API temen2 back end
 
 void main() {
   runApp(MaterialApp(
-    home: MyApp(),
+    theme: ThemeData(
+        fontFamily: 'Roboto_Condensed',
+        textTheme:
+            TextTheme(bodyLarge: TextStyle(fontWeight: FontWeight.normal))),
+    home: Galeri(),
   ));
 }
 
@@ -51,6 +61,7 @@ class _HelloWordState extends State<HelloWord> {
   //dua variabel yang dibuat jika ingin menggunakan date
   DateTime _dueDate = DateTime.now();
   final currentDate = DateTime.now();
+  Color _currentColor = Colors.orange;
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +135,12 @@ class _HelloWordState extends State<HelloWord> {
               ),
               //checkbox simple
               Divider(),
-
+              datePicker(context),
+              buildColorPicker(context),
+              buildFilePicker(),
+              SizedBox(
+                height: 2,
+              ),
               ElevatedButton(
                 child: Text('Submit'),
                 onPressed: () {
@@ -132,7 +148,8 @@ class _HelloWordState extends State<HelloWord> {
                     data_kontak.add({
                       "title": "${inputControllers.text}",
                       "jenis_kelamin": "$radioValue",
-                      "skill": "$checkboxValue"
+                      "skill": "$checkboxValue",
+                      "color": "$_currentColor",
                     });
                   });
 
@@ -147,8 +164,19 @@ class _HelloWordState extends State<HelloWord> {
                         return ListTile(
                           leading: FlutterLogo(),
                           title: Text('${data_kontak[index]["title"]}'),
-                          subtitle:
-                              Text('${data_kontak[index]["jenis_kelamin"]}'),
+                          subtitle: Column(
+                            children: [
+                              Text(
+                                  'Jenis Kelamin : ${data_kontak[index]["jenis_kelamin"]} '),
+                              Text('Color : '),
+                              Container(
+                                width: 10,
+                                height: 10,
+                                // color: data_kontak[index][
+                                //     "color"], // Menggunakan data color sebagai warna
+                              )
+                            ],
+                          ),
                           trailing: Wrap(children: [
                             IconButton(
                                 onPressed: () {
@@ -174,6 +202,37 @@ class _HelloWordState extends State<HelloWord> {
         ),
       ),
     ));
+  }
+
+  Column datePicker(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Date'),
+            TextButton(
+                onPressed: () async {
+                  final selectDate = await showDatePicker(
+                      context: context,
+                      initialDate: currentDate,
+                      firstDate: DateTime(1990),
+                      lastDate: DateTime(currentDate.year + 5));
+
+                  setState(() {
+                    if (selectDate != null) {
+                      _dueDate = selectDate;
+                    }
+                  });
+                  print('select date');
+                },
+                child: Text('Select'))
+          ],
+        ),
+        Text(DateFormat('dd-MM-yyyy').format(_dueDate)),
+      ],
+    );
   }
 
   Future<String?> AlertEdit(BuildContext context, int index) {
@@ -222,5 +281,88 @@ class _HelloWordState extends State<HelloWord> {
         // 4. masukkan data sebelumnya ke alert dialog tersebut(tempat kita untuk mendapatkan data baru)
         // 5. ketika button di klik, maka data akan berganti
         );
+  }
+
+  Widget buildColorPicker(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('Color'),
+        const SizedBox(height: 10),
+        Container(
+          height: 100,
+          width: double.infinity,
+          color: _currentColor,
+        ),
+        const SizedBox(height: 10),
+        Center(
+            child: ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Pick Your Color'),
+                          content: BlockPicker(
+                              pickerColor: Colors.red,
+                              onColorChanged: (color) {
+                                setState(() {
+                                  print(_currentColor);
+                                  _currentColor = color;
+                                  print(
+                                      'sekarang warna berubah $_currentColor');
+                                });
+                              }),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text('Save'),
+                            )
+                          ],
+                        );
+                      });
+                  print('pick color');
+                },
+                child: Text('Pick Color')))
+      ],
+    );
+  }
+
+  Widget buildFilePicker() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: 20,
+        ),
+        const Text('Pick File'),
+        const SizedBox(
+          height: 10,
+        ),
+        Center(
+          child: ElevatedButton(
+            onPressed: () {
+              _pickFile();
+            },
+            child: const Text('Pick and Open File'),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _pickFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+
+    final file = result.files.first;
+    _openFile(file);
+    print('_pickFile');
+  }
+
+  void _openFile(PlatformFile file) {
+    OpenFile.open(file.path);
   }
 }
