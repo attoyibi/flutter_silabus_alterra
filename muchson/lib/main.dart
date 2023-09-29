@@ -3,8 +3,9 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:intl/intl.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:muchson/theme/app_theme.dart';
+import 'package:muchson/view/screen/contact.dart';
 import 'package:open_file/open_file.dart';
-import 'ui/screen/galeri.dart';
+import 'view/screen/galeri.dart';
 
 List data_kontak = [
   {
@@ -26,11 +27,13 @@ List data_kontak = [
 
 void main() {
   runApp(MaterialApp(
+    initialRoute: '/',
+    routes: {'/': (_) => Galeri(), '/contact': (_) => Contact()},
     theme: ThemeData(
         fontFamily: 'Roboto_Condensed',
         textTheme:
             TextTheme(bodyLarge: TextStyle(fontWeight: FontWeight.normal))),
-    home: Galeri(),
+    // home: Galeri(),
   ));
 }
 
