@@ -4,8 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:muchson/theme/app_theme.dart';
 import 'package:muchson/view/screen/contact.dart';
+import 'package:muchson/view/screen/sign_in.dart';
+import 'package:muchson/view/screen/sign_up.dart';
 import 'package:open_file/open_file.dart';
 import 'view/screen/galeri.dart';
+import 'package:provider/provider.dart';
 
 List data_kontak = [
   {
@@ -25,15 +28,33 @@ List data_kontak = [
   },
 ]; // data  akan  kita dapatkan dari API temen2 back end
 
+class SignUpData {
+  String username;
+  String email;
+  String password;
+
+  SignUpData(
+      {required this.username, required this.email, required this.password});
+}
+
 void main() {
-  runApp(MaterialApp(
-    initialRoute: '/',
-    routes: {'/': (_) => Galeri(), '/contact': (_) => Contact()},
-    theme: ThemeData(
-        fontFamily: 'Roboto_Condensed',
-        textTheme:
-            TextTheme(bodyLarge: TextStyle(fontWeight: FontWeight.normal))),
-    // home: Galeri(),
+  runApp(ChangeNotifierProvider(
+    create: (context) =>
+        SignUpProvider(), // Create an instance of your provider
+    child: MaterialApp(
+      initialRoute: '/contact',
+      routes: {
+        '/': (_) => SignUpPage(),
+        '/contact': (_) => Contact(),
+        '/galeri': (_) => Galeri(),
+        '/login': (_) => SignInPage()
+      },
+      theme: ThemeData(
+          fontFamily: 'Roboto_Condensed',
+          textTheme:
+              TextTheme(bodyLarge: TextStyle(fontWeight: FontWeight.normal))),
+      // home: Galeri(),
+    ),
   ));
 }
 
@@ -367,5 +388,26 @@ class _HelloWordState extends State<HelloWord> {
 
   void _openFile(PlatformFile file) {
     OpenFile.open(file.path);
+  }
+}
+
+class SignUpProvider extends ChangeNotifier {
+  SignUpData _signupData = SignUpData(username: '', email: '', password: '');
+
+  SignUpData get signupData => _signupData;
+
+  void updateUsername(String username) {
+    _signupData.username = username;
+    notifyListeners();
+  }
+
+  void updateEmail(String email) {
+    _signupData.email = email;
+    notifyListeners();
+  }
+
+  void updatePassword(String password) {
+    _signupData.password = password;
+    notifyListeners();
   }
 }
