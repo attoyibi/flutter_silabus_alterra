@@ -59,6 +59,16 @@ class _MyHomePageState extends State<MyHomePage> {
     nomorController.clear();
   }
 
+  Future<void> chatBot() async {
+    final name = nameController.text;
+    final nomor = nomorController.text;
+    final response = await dio.post(
+      'openai',
+      data: {'name': name, 'nomor': nomor},
+    );
+    fetchData(); // Memuat ulang data setelah penghapusan
+  }
+
   Future<void> deleteData(String userId) async {
     final response = await dio
         .delete('https://631d6133789612cd07a9ce1d.mockapi.io/users/$userId');
