@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Check Auth'),
+            Text('Auth di firebase dengan flutter'),
             ElevatedButton(
                 onPressed: () {
                   try {
@@ -100,7 +100,37 @@ class _MyHomePageState extends State<MyHomePage> {
                     print(e);
                   }
                 },
-                child: Text("Check"))
+                child: Text("Daftar Auth")),
+            ElevatedButton(
+                onPressed: () {
+                  try {
+                    final result = FirebaseAuth.instance
+                        .authStateChanges()
+                        .listen((User? user) {
+                      if (user != null) {
+                        print(user.uid);
+                      }
+                    });
+                    ;
+                    print('object');
+                  } on Exception catch (e) {
+                    print(e);
+                  }
+                },
+                child: Text("Check User Terdaftar")),
+            ElevatedButton(
+                onPressed: () async {
+                  try {
+                    final result = await FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                            email: "muhammad@coba.con", password: "123456");
+                    print(result);
+                  } on Exception catch (e) {
+                    print(e);
+                    print("Username atau Password Salah");
+                  }
+                },
+                child: Text("Check email muhammad@coba.con"))
           ],
         ),
       ),
