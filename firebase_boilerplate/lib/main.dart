@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -130,7 +131,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     print("Username atau Password Salah");
                   }
                 },
-                child: Text("Check email muhammad@coba.con"))
+                child: Text("Check email muhammad@coba.con")),
+            Image.network(
+              'https://firebasestorage.googleapis.com/v0/b/flutter-boilerplate-39ee6.appspot.com/o/icon_play.png?alt=media&token=502218a9-a996-4fe6-878a-73804e3d861f&_gl=1*4vayuy*_ga*MTE3NjQ3MzA5Mi4xNjk0MjczMzEz*_ga_CW55HF8NVT*MTY5Nzg1NDUyMC4xNi4xLjE2OTc4NTU5MTQuMjkuMC4w',
+            ),
           ],
         ),
       ),
